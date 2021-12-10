@@ -58,7 +58,9 @@ mongoose.connect(process.env.DB_URI)
 .catch((error) => console.log(error));
 
 // HTTP Routes
-// **
+app.use('/', require('./routes/user'));
+app.use('/admin', require('./routes/admin'));
+app.use('/petugas', require('./routes/petugas'));
 
 // Ping Server!
 app.get('/ping', (req, res, next) => {
