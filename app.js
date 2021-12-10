@@ -1,4 +1,4 @@
-// Require module
+// Requiring module, packages, etc.
 const express = require('express');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
@@ -26,16 +26,16 @@ app.use(session({
 
 // Middleware
 app.use((req, res, next) => {
-    if(req.session.userId){
-        res.locals.userId = req.session.userId;
+    if(req.session.idUser){
+        res.locals.idUser = req.session.idUser;
     }
 
     next();
 });
 
 app.use((req, res, next) => {
-    if(req.session.adminId){
-        res.locals.adminId = req.session.adminId;
+    if(req.session.idAdmin){
+        res.locals.idAdmin = req.session.idAdmin;
     }
 
     next();
