@@ -28,6 +28,24 @@ router.get('/register', (req, res) => {
     }
 });
 
+router.get('/ticket', (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout'});
+    }
+})
+
+router.get('/submit', (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout'});
+    }
+})
+
 router.get('/', (req, res) => {
     if(!req.session.idUser){
         res.redirect('/login');

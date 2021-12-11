@@ -80,6 +80,7 @@ exports.Login = async (req, res, next) => {
 
         // Success
         req.session.idUser = user.idUser;
+        req.session.namaUser = user.nama;
 
         console.log('Logged in!');
         return res.redirect('/');
@@ -94,6 +95,8 @@ exports.Login = async (req, res, next) => {
 exports.Logout = async (req, res, next) => {
     try{
         delete req.session.idUser;
+        delete req.session.namaUser;
+
         return res.redirect('/login');
     }
     catch (error){
