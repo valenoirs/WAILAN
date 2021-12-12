@@ -57,6 +57,16 @@ router.get('/', (req, res) => {
     else{
         res.render('user/home',  {title: 'Home', layout: 'layouts/user-layout'});
     }
-});
+})
+
+router.get('/ticket/:idTicket', async (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        const ticket = await Ticket.findOne({idTicket: req.params.idTicket});
+        res.render('user/detail', {title: 'Ticket', layout: 'layouts/user-layout', ticket});
+    }
+})
 
 module.exports = router;

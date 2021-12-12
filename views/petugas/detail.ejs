@@ -1,0 +1,29 @@
+<div class="row mt-4">
+    <div class="col">
+      <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
+    </div>
+</div>
+<div class="row justify-content-center mt-4">
+  <table class="table table-striped table-hover" id="myTable">
+    <thead class="table">
+          <tr>
+            <th style="width: 100px;" scope="col"></th>
+            <th scope="col"><h4><%= ticket.subject %></h4></th>
+            <th style="width: 200px;" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td>
+                <p><%= ticket.keterangan %></p>
+                <br>
+                <p>Pengaju tiket : <strong><%= ticket.nameUser %></strong></p>
+                <br>
+                <a href="/petugas/chatroom/" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Pengaju</a>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+      </table>
+</div>

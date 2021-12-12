@@ -61,4 +61,14 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/ticket/:idTicket', async (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        const ticket = await Ticket.findOne({idTicket: req.params.idTicket});
+        res.render('petugas/detail', {title: 'Ticket', layout: 'layouts/petugas-layout', ticket});
+    }
+})
+
 module.exports = router;
