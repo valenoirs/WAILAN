@@ -67,6 +67,7 @@ app.use('/', require('./routes/user'));
 app.use('/admin', require('./routes/admin'));
 app.use('/petugas', require('./routes/petugas'));
 app.use('/ticket', require('./routes/ticket'));
+app.use('/chatroom', require('./routes/chatroom'));
 
 // Ping Server!
 app.get('/ping', (req, res, next) => {

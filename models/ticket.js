@@ -6,6 +6,7 @@ const Ticket = mongoose.model('Ticket', new mongoose.Schema({
     nameUser: {type: String,  required: true},
     idPetugas: {type: String,  required: true, default: " "},
     namePetugas: {type: String,  required: true, default: " "},
+    idChatroom: {type: String,  required: true, default: " "},
     subject: {type: String,  required: true},
     keterangan: {type: String,  required: true},
     fixed: {type: Boolean,  required: true, default: false},

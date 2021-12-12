@@ -4,6 +4,7 @@ const UserController = require('../controllers/user');
 
 // Import Models
 const Ticket = require('../models/ticket');
+const Chatroom = require('../models/chatroom');
 
 // Post
 router.post('/login', UserController.Login);
@@ -56,6 +57,16 @@ router.get('/', (req, res) => {
     }
     else{
         res.render('user/home',  {title: 'Home', layout: 'layouts/user-layout'});
+    }
+})
+
+router.get('/chatroom/:idChatroom', async (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        const chatroom = await Chatroom.findOne({idChatroom: req.params.idChatroom});
+        res.render('user/chatroom', {title: 'Chatroom', layout: 'layouts/user-layout', chatroom});
     }
 })
 

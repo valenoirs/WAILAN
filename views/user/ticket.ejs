@@ -48,7 +48,7 @@
                   <p><%= ticket.keterangan %></p>
                   <h6>Status : <%= ticket.status; %></h6>
                 </td>
-                <td><a href="" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi</a></td>
+                <td><a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a></td>
                 </tr>
               <% } else if(ticket.status === 'Ditolak') { %> 
                 <th scope="row"><%= i + 1 %> </th>

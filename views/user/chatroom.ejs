@@ -1,0 +1,65 @@
+<div class="row mt-4">
+    <div class="col">
+      <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
+    </div>
+  </div>
+  <hr>
+  <div class="row justify-content-center mt-4" style="overflow: auto;height: 300px;">
+  <table class="table table-borderless" id="myTable" >
+    <thead>
+          <tr>
+            <th style="width: 100px;" scope="col"></th>
+            <!-- <th scope="col"><h4><%= chatroom.subject %></h4></th> -->
+            <th scope="col"></th>
+            <th style="width: 200px;" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td>
+                  <% chatroom.pesan.forEach(pesan => { %>
+                    <% if (!pesan.petugas) { %>
+                        <tr>
+                            <th>
+            
+                            </th>
+                            <td style="text-align: end;">
+                                <h6><%= pesan.nama %></h6>
+                                <p><%= pesan.pesan %></p>
+                            </td>
+                            <td></td>
+                        </tr>
+                    <% } else { %>
+                        <tr>
+                            <th>
+            
+                            </th>
+                            <td>
+                              <h6><%= pesan.nama %></h6>
+                                <p><%= pesan.pesan %></p>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                    <% } %>
+                  <% }) %>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+      </table>
+</div>
+<hr>
+<% if (!chatroom.disabled) { %>
+  <div class="row mt-3 mb-3">
+    <form method="POST" action="/chatroom">
+        <input type="hidden" name="nama" value="<%= chatroom.nameUser %>">
+        <input type="hidden" name="petugas" value="false">
+        <input type="hidden" name="idChatroom" value="<%= chatroom.idChatroom %>">
+
+        <input style="width: 500px;" type="text" class="form-control mb-1" placeholder="Pesan" name="pesan" aria-describedby="emailHelp" required>
+        <button style="width: 50px;" type="submit" class="btn btn-primary mb-3"><i class="bi bi-send-fill"></i></button>
+    </form>
+  </div> 
+<% } %>

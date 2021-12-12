@@ -32,7 +32,7 @@
               <p><%= ticket.keterangan %></p>
               <br>
               <% if (ticket.status === "Diterima") { %>
-                <a href="" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
+                <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
               <% } %>
             </td>
             <td></td>

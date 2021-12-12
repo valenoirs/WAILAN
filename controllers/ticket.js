@@ -5,6 +5,7 @@ const {v4: uuidv4} = require('uuid');
 const User = require('../models/user');
 const Ticket = require('../models/ticket');
 const Petugas = require('../models/petugas');
+const Chatroom = require('../models/chatroom');
 
 // #region User
 module.exports.Submit = async (req, res, next) => {
@@ -69,12 +70,26 @@ exports.Approve = async (req, res, next) => {
             return res.redirect('/petugas/ticket');
         }
 
+        console.log(req.body)
+
+        const idChatroom = uuidv4();
+
         await Ticket.updateOne({idTicket: req.body.idTicket}, {
             $set : {
+                idChatroom,
                 idPetugas: req.session.idPetugas,
                 namePetugas: petugas.name,
                 status: 'Diterima'
             }
+        })
+
+        await Chatroom.insertMany({
+            idChatroom,
+            idUser: ticket.idUser,
+            idPetugas: req.session.idPetugas,
+            nameUser: ticket.nameUser,
+            namePetugas: petugas.name,
+            subject: ticket.subject,
         })
 
         console.log('Ticket approved!');

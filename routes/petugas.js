@@ -4,6 +4,7 @@ const PetugasController = require('../controllers/petugas');
 
 // Import Models
 const Ticket = require('../models/ticket');
+const Chatroom = require('../models/chatroom');
 
 // Post
 router.post('/login', PetugasController.Login);
@@ -60,6 +61,16 @@ router.get('/', (req, res) => {
         res.render('petugas/home', {title: 'Home', layout: 'layouts/petugas-layout'});
     }
 });
+
+router.get('/chatroom/:idChatroom', async (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        const chatroom = await Chatroom.findOne({idChatroom: req.params.idChatroom});
+        res.render('petugas/chatroom', {title: 'Chatroom', layout: 'layouts/petugas-layout', chatroom});
+    }
+})
 
 router.get('/ticket/:idTicket', async (req, res) => {
     if(!req.session.idUser){
