@@ -68,5 +68,10 @@ app.get('/ping', (req, res, next) => {
     res.send('<h4>Putang ina mo bobo talaga gago!<h4><h4>Sekarang server sementara berjalan!<h4><h4>Now the server is running!<h4>');
 });
 
+app.use('/', (req, res) => {
+    res.status(404)
+    res.send('<h1>404</h1>');
+});
+
 // Start Server
 app.listen(port, () => {console.log(`Server Runnning at port ${port}`)});

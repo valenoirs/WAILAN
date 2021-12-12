@@ -3,44 +3,19 @@
         <h1>Submit Ticket</h1>
         <form method="POST" action="/ticket">
             <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
+                <label for="name" class="form-label">Subject</label>
                 <div class="row">
-                    <input type="text" class="form-control" placeholder="Nama" name="name" required>
+                    <input type="text" class="form-control" placeholder="Subject" name="subject" required>
                 </div>
             </div>
             <div class="mb-3">
-                <label for="gender" class="form-label">Gender</label><br>
-                <input type="radio" name="gender" value="Laki-laki" checked>
-                <label for="laki-laki">Laki-laki</label><br>
-                <input type="radio" name="gender" value="Perempuan">
-                <label for="perempuan">Perempuan</label><br>
-              </div>
-            <div class="mb-3">
-                <label for="birth" class="form-label">Tanggal Lahir</label>
+                <label for="email" class="form-label">Keterangan</label>
                 <div class="row">
-                    <input type="date" class="form-control" name="birth" required/>
+                    <textarea class="form-control" style="width: 35rem;" placeholder="Keterangan" name="keterangan" rows="3" required></textarea>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <div class="row">
-                    <input type="text" class="form-control" placeholder="E-mail" name="email" aria-describedby="emailHelp" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <div class="row">
-                    <input type="password" class="form-control" placeholder="Min 8 characters" name="password" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Confirm Password</label>
-                <div class="row">
-                    <input type="password" class="form-control" placeholder="Same with above" name="confirmPassword" required>
-                </div>
-            </div>
+            <input type="hidden" name="idUser" value="<%= idUser %>">
             <button type="submit" class="btn btn-primary mb-3">Register</button>
-            <p class="mb-5">Already have an account? <a href="/register">Login!</a>. Or you are an admin? <a href="/admin/login">Click here!</a></p>
             </form>
     </div>
 </div>

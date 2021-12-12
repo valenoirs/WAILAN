@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/user');
 
+// Import Models
+const Ticket = require('../models/ticket');
+
 // Post
 router.post('/login', UserController.Login);
 router.post('/register', UserController.Register);
@@ -28,12 +31,13 @@ router.get('/register', (req, res) => {
     }
 });
 
-router.get('/ticket', (req, res) => {
+router.get('/ticket', async (req, res) => {
     if(!req.session.idUser){
         res.redirect('/login');
     }
     else{
-        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout'});
+        const tickets = await Ticket.find({idUser: req.session.idUser});
+        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout', tickets});
     }
 })
 
