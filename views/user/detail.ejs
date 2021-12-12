@@ -1,30 +1,42 @@
 <div class="row mt-4">
-    <div class="col">
-      <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
-    </div>
+  <div class="col">
+    <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
+  </div>
 </div>
 <div class="row justify-content-center mt-4">
-  <table class="table table-striped table-hover" id="myTable">
-    <thead class="table">
+<table class="table" id="myTable">
+  <thead class="table">
+        <tr>
+          <th style="width: 100px;" scope="col"></th>
+          <th scope="col"><h4><%= ticket.subject %></h4></th>
+          <th style="width: 200px;" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"></th>
+          <td>
+            <% if (ticket.namePetugas === " ") { %>
+              Status tiket : <strong><%= ticket.status %></strong>
+            <% } else { %>
+              Petugas tiket : <i><%= ticket.namePetugas %></i>
+            <% } %>
+          </td>
+          <td></td>
+        </tr>
           <tr>
-            <th style="width: 100px;" scope="col"></th>
-            <th scope="col">Subject</th>
-            <th style="width: 200px;" scope="col"></th>
+            <th scope="row"></th>
+            <td>
+              <p>Pengaju tiket : <i><%= ticket.nameUser %></i></p>
+
+              <p><%= ticket.keterangan %></p>
+              <br>
+              <% if (ticket.status === "Diterima") { %>
+                <a href="" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
+              <% } %>
+            </td>
+            <td></td>
           </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <th scope="row"></th>
-              <td>
-                <h5><%= ticket.subject %></h5>
-                <p><%= ticket.keterangan %></p>
-                <br>
-                <p>Diterima oleh petugas : <strong><%= ticket.namePetugas %></strong></p>
-                <br>
-                <a href="/chatroom/" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
-              </td>
-              <td></td>
-            </tr>
-          </tbody>
-      </table>
+        </tbody>
+    </table>
 </div>

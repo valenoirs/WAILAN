@@ -47,7 +47,7 @@ router.get('/ticket/approved', async (req, res) => {
         res.redirect('/petugas/login');
     }
     else{
-        const tickets = await Ticket.find({idPetugas: req.session.idPetugas, })
+        const tickets = await Ticket.find({idPetugas: req.session.idPetugas, status: 'Diterima'})
         res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets});
     }
 });

@@ -101,7 +101,7 @@ exports.Decline = async (req, res, next) => {
         await Ticket.updateOne({idTicket: req.body.idTicket}, {
             $set : {
                 idPetugas: req.session.idPetugas,
-                namaPetugas: petugas.name,
+                namePetugas: petugas.name,
                 status: 'Ditolak'
             }
         })
