@@ -29,7 +29,13 @@ app.use((req, res, next) => {
     if(req.session.idUser){
         res.locals.idUser = req.session.idUser;
     }
+    next();
+});
 
+app.use((req, res, next) => {
+    if(req.session.idPetugas){
+        res.locals.idPetugas = req.session.idPetugas;
+    }
     next();
 });
 
@@ -37,9 +43,8 @@ app.use((req, res, next) => {
     if(req.session.idAdmin){
         res.locals.idAdmin = req.session.idAdmin;
     }
-
     next();
-})
+});
 
 // Templating Engine
 app.set('view engine', 'ejs');

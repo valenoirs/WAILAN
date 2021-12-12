@@ -5,7 +5,7 @@ const {v4: uuidv4} = require('uuid')
 const comparePassword = require('../utils/comparePassword');
 const hashPassword = require('../utils/hashPassword');
 
-// Importing Model
+// Import Model
 const User = require('../models/user');
 
 // Validate User

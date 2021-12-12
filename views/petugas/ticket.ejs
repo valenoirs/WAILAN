@@ -15,8 +15,8 @@
     <thead class="table">
           <tr>
             <th style="width: 100px;" scope="col">#</th>
+            <th style="width: 150px;" scope="col">Nama</th>
             <th scope="col">Subject</th>
-            <!-- <th scope="col">Keterangan</th>-->
             <th style="width: 200px;" scope="col">More</th>
           </tr>
         </thead>
@@ -24,56 +24,62 @@
             <% tickets.forEach((ticket, i) => { %>
             <tr>
               <% if (ticket.status === 'Menunggu') { %>
-              <th scope="row"><%= i + 1 %> </th>
-              <td>
-                <a href="">
-                    <h5><%= ticket.subject %></h5>
-                  </a>
-                <p><%= ticket.keterangan %></p>
-                <h6>Status : <%= ticket.status; %></h6>
-              </td>
-              <td>
-                <form method="POST" action="/ticket/cancel">
-                  <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
-                  <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i> Batalkan</button>
-                </form>
-              </td>
-              </tr>
-              <% } else if (ticket.status === 'Diterima') { %>
                 <th scope="row"><%= i + 1 %> </th>
+                <td><%= ticket.nameUser %></td>
                 <td>
                   <a href="">
                     <h5><%= ticket.subject %></h5>
                   </a>
                   <p><%= ticket.keterangan %></p>
-                  <h6>Status : <%= ticket.status; %></h6>
                 </td>
-                <td><a href="" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi</a></td>
+                <td>
+                  <form class="d-inline" method="POST" action="/ticket/approve">
+                    <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i></button>
+                  </form>
+                  <form class="d-inline" method="POST" action="/ticket/decline">
+                    <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i></button>
+                  </form>
+                </td>
+                </tr>
+              <% } else if (ticket.status === 'Diterima') { %>
+                <th scope="row"><%= i + 1 %> </th>
+                <td><%= ticket.nameUser %></td>
+                <td>
+                  <a href="">
+                    <h5><%= ticket.subject %></h5>
+                  </a>
+                  <p><%= ticket.keterangan %></p>
+                </td>
+                <td>
+                  <a href="" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi</a>
+                </td>
                 </tr>
               <% } else if(ticket.status === 'Ditolak') { %> 
                 <th scope="row"><%= i + 1 %> </th>
+                <td><%= ticket.nameUser %></td>
                 <td>
                   <a href="">
                     <h5><%= ticket.subject %></h5>
                   </a>
                   <p><%= ticket.keterangan %></p>
-                  <h6>Status : <%= ticket.status; %></h6>
                 </td>
                 <td>
-                  <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Ditolak</button>
+                    <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Ditolak</button>
                 </td>
                 </tr>
               <% } else if(ticket.status === 'Dibatalkan') { %> 
                 <th scope="row"><%= i + 1 %> </th>
+                <td><%= ticket.nameUser %></td>
                 <td>
                   <a href="">
                     <h5><%= ticket.subject %></h5>
                   </a>
                   <p><%= ticket.keterangan %></p>
-                  <h6>Status : <%= ticket.status; %></h6>
                 </td>
                 <td>
-                  <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Dibatalkan</button>
+                    <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Dibatalkan</button>
                 </td>
                 </tr>
               <% } %>
