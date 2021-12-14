@@ -1,7 +1,7 @@
 <div class="row mt-4">
-    <div class="col">
-      <a href="/petugas" class="">Home</a> / <a href="/petugas/ticket">Ticket</a>
-    </div>
+  <div class="col">
+    <a href="/petugas" class="">Home</a> / <a href="/petugas/ticket">Ticket</a>
+  </div>
 </div>
 <div class="row justify-content-center mt-4">
   <table class="table" id="myTable">
@@ -17,7 +17,7 @@
             <th scope="row"></th>
             <td>
               <% if (ticket.namePetugas === " ") { %>
-                Status tiket : <strong><%= ticket.status %></strong>
+                Status : <strong><%= ticket.status %></strong>
               <% } else { %>
                 Petugas tiket : <i><%= ticket.namePetugas %></i>
               <% } %>

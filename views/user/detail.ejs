@@ -6,37 +6,37 @@
 <div class="row justify-content-center mt-4">
 <table class="table" id="myTable">
   <thead class="table">
-        <tr>
-          <th style="width: 100px;" scope="col"></th>
-          <th scope="col"><h4><%= ticket.subject %></h4></th>
-          <th style="width: 200px;" scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row"></th>
-          <td>
-            <% if (ticket.namePetugas === " ") { %>
-              Status tiket : <strong><%= ticket.status %></strong>
-            <% } else { %>
-              Petugas tiket : <i><%= ticket.namePetugas %></i>
-            <% } %>
-          </td>
-          <td></td>
-        </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>
-              <p>Pengaju tiket : <i><%= ticket.nameUser %></i></p>
+      <tr>
+        <th style="width: 100px;" scope="col"></th>
+        <th scope="col"><h4><%= ticket.subject %></h4></th>
+        <th style="width: 200px;" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td>
+          <% if (ticket.namePetugas === " ") { %>
+            Status : <strong><%= ticket.status %></strong>
+          <% } else { %>
+            Petugas tiket : <i><%= ticket.namePetugas %></i>
+          <% } %>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>
+          <p>Pengaju tiket : <i><%= ticket.nameUser %></i></p>
 
-              <p><%= ticket.keterangan %></p>
-              <br>
-              <% if (ticket.status === "Diterima") { %>
-                <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
-              <% } %>
-            </td>
-            <td></td>
-          </tr>
-        </tbody>
-    </table>
+          <p><%= ticket.keterangan %></p>
+          <br>
+          <% if (ticket.status === "Diterima") { %>
+            <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
+          <% } %>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+</table>
 </div>
