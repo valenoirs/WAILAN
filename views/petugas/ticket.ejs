@@ -65,8 +65,8 @@
                     <p><%= ticket.keterangan %></p>
                     <h6>Status : <%= ticket.status; %></h6>
                   </td>
-                  <td>
-                    <form method="POST" action="/ticket/cancel">
+                  <td class="text-center">
+                    <form class="mt-5" method="POST" action="/ticket/cancel">
                       <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i> Batalkan</button>
                     </form>
@@ -82,8 +82,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <div class="btn-group">
+                    <td class="text-center">
+                      <div class="btn-group mt-5">
                         <a href="/petugas/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
                         <form method="POST" action="/ticket/selesai">
                           <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
@@ -103,8 +103,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Ditolak</button>
+                    <td class="text-center">
+                      <h6 class="text-danger mt-5"><i class="bi bi-info-circle"></i> Ditolak</h6>
                     </td>
                     </tr>
                   <% } else if(ticket.status === 'Dibatalkan') { %> 
@@ -117,8 +117,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Dibatalkan</button>
+                    <td class="text-center">
+                      <h6 class="text-danger mt-5"><i class="bi bi-info-circle"></i> Dibatalkan</h6>
                     </td>
                     </tr>
                   <% } else if(ticket.status === 'Selesai') { %>
@@ -131,8 +131,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-success" disabled><i class="bi bi-info-circle"></i> Selesai</button>
+                    <td class="text-center">
+                      <h6 class="text-success mt-5"><i class="bi bi-info-circle"></i> Selesai</h6>
                     </td>
                     </tr>
                   <% } %>
@@ -162,8 +162,8 @@
                         <p><%= ticket.keterangan %></p>
                         <h6>Status : <%= ticket.status; %></h6>
                       </td>
-                      <td>
-                        <div class="btn-group">
+                      <td class="text-center">
+                        <div class="btn-group mt-5">
                           <a href="/chatroompetugas//<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
                           <form method="POST" action="/ticket/selesai">
                             <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
@@ -200,8 +200,8 @@
                         <p><%= ticket.keterangan %></p>
                         <h6>Status : <%= ticket.status; %></h6>
                       </td>
-                      <td>
-                        <form method="POST" action="/ticket/cancel">
+                      <td class="text-center">
+                        <form class="mt-5" method="POST" action="/ticket/cancel">
                           <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
                           <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i> Batalkan</button>
                         </form>
@@ -234,8 +234,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Dibatalkan</button>
+                    <td class="text-center">
+                      <h6 class="text-danger mt-5"><i class="bi bi-info-circle"></i> Dibatalkan</h6>
                     </td>
                     </tr>
                   <% } %>
@@ -265,8 +265,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Ditolak</button>
+                    <td class="text-area">
+                      <h6 class="text-danger mt-5"><i class="bi bi-info-circle"></i> Ditolak</h6>
                     </td>
                     </tr>
                   <% } %>
@@ -296,8 +296,8 @@
                       <p><%= ticket.keterangan %></p>
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
-                    <td>
-                      <button class="btn text-success" disabled><i class="bi bi-info-circle"></i> Selesai</button>
+                    <td class="text-area">
+                      <h6 class="text-success mt-5"><i class="bi bi-info-circle"></i> Selesai</h6>
                     </td>
                     </tr>
                   <% } %>
