@@ -6,8 +6,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
 
-require('dotenv').config();
 const app = express();
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+require('dotenv').config();
 const port = process.env.LOCAL_PORT;
 
 // Create session store in database
@@ -78,6 +82,16 @@ app.use('/', (req, res) => {
     res.status(404)
     res.send('<h1>404</h1>');
 });
+
+io.on('connection', (socket) => {
+    console.log('User Connected!')
+    socket.on('disconnect', () => {
+        console.log("User Disconnected!");
+    })
+    socket.on('chat', (messageInfo) => {
+        console.log(messageInfo);
+    })
+})
 
 // Start Server
 app.listen(port, () => {console.log(`Server Runnning at port ${port}`)});

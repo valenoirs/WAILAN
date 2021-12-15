@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const TicketController = require('../controllers/ticket');
 
+router.post('/selesai', TicketController.Selesai);
+
 // #region User
 // Post
 router.post('/', TicketController.Submit);

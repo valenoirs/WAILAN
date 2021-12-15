@@ -131,3 +131,32 @@ exports.Decline = async (req, res, next) => {
     }
 }
 // #endregion
+
+module.exports.Selesai = async (req, res, next) => {
+    try{
+        const ticket = await Ticket.findOne({idTicket: req.body.idTicket});
+
+        if(!ticket){
+            console.log('404. Ticket not found!');
+            req.session.error = 'Ticket tidak ditemukan!';
+            return res.redirect('/ticket');
+        }
+
+        // await Ticket.updateOne({idTicket: req.body.idTicket}, {
+        //     $set : {
+        //         status: 'Selesai',
+        //         fixed: true
+        //     }
+        // })
+        console.log(req.body);
+        console.log('Ticket complete!');
+
+        // if(console.req.body)
+        return res.redirect('/ticket');
+    }
+    catch(error){
+        console.error('completing-ticket-error', error);
+        req.session.error = 'Completing Ticket Error - Unknown Error';
+        return res.redirect('/ticket')
+    }
+};

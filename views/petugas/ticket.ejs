@@ -82,6 +82,19 @@
                     <button class="btn text-danger" disabled><i class="bi bi-info-circle"></i> Dibatalkan</button>
                 </td>
                 </tr>
+              <% } else if(ticket.status === 'Selesai') { %>
+                <th scope="row"><%= i + 1 %> </th>
+                <td>
+                  <a href="/ticket/<%= ticket.idTicket %>">
+                    <h5><%= ticket.subject %></h5>
+                  </a>
+                  <p><%= ticket.keterangan %></p>
+                  <h6>Status : <%= ticket.status; %></h6>
+                </td>
+                <td>
+                  <button class="btn text-success" disabled><i class="bi bi-info-circle"></i> Selesai</button>
+                </td>
+                </tr>
               <% } %>
             <% }) %>
           </tbody>
