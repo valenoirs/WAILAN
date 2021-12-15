@@ -16,23 +16,34 @@
       <tr>
         <th scope="row"></th>
         <td>
-          <% if (ticket.namePetugas === " ") { %>
-            Status : <strong><%= ticket.status %></strong>
-          <% } else { %>
-            Petugas tiket : <i><%= ticket.namePetugas %></i>
-          <% } %>
+          Petugas tiket : <i><%= ticket.namePetugas %></i>
         </td>
         <td></td>
       </tr>
       <tr>
         <th scope="row"></th>
         <td>
-          <p>Pengaju tiket : <i><%= ticket.nameUser %></i></p>
-
+          Pengaju tiket : <i><%= ticket.nameUser %></i>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>
+          <p>Status : <strong><%= ticket.status %></strong></p>
           <p><%= ticket.keterangan %></p>
           <br>
-          <% if (ticket.status === "Diterima") { %>
-            <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Petugas</a>
+          <% if (ticket.status === "Diterima" || ticket.status === "Selesai") { %>
+            <div class="btn-group">
+            <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
+            <% if (!ticket.fixed) { %>
+              <form class="" method="POST" action="/ticket/selesai">
+                <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                <input type="hidden" name="petugas" name="true">
+                <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-bookmark-check-fill"></i></button>
+              </form>
+            <% } %>
+            </div>
           <% } %>
         </td>
         <td></td>

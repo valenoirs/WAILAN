@@ -16,27 +16,29 @@
           <tr>
             <th scope="row"></th>
             <td>
-              <% if (ticket.namePetugas === " ") { %>
-                Status : <strong><%= ticket.status %></strong>
-              <% } else { %>
-                Petugas tiket : <i><%= ticket.namePetugas %></i>
+              Petugas tiket : <i><%= ticket.namePetugas %></i>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td>
+              Pengaju tiket : <i><%= ticket.nameUser %></i>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td>
+              <p>Status : <strong><%= ticket.status %></strong></p>
+              <p><%= ticket.keterangan %></p>
+              <br>
+              <% if (ticket.idPetugas === idPetugas && ticket.status === "Diterima") { %>
+                <a href="/petugas/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Pengaju</a>
               <% } %>
             </td>
             <td></td>
           </tr>
-            <tr>
-              <th scope="row"></th>
-              <td>
-                <p>Pengaju tiket : <i><%= ticket.nameUser %></i></p>
-
-                <p><%= ticket.keterangan %></p>
-                <br>
-                <% if (ticket.idPetugas === idPetugas && ticket.status === "Diterima") { %>
-                  <a href="/petugas/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-info-circle"></i> Hubungi Pengaju</a>
-                <% } %>
-              </td>
-              <td></td>
-            </tr>
-          </tbody>
+        </tbody>
       </table>
 </div>

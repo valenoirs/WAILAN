@@ -142,17 +142,27 @@ module.exports.Selesai = async (req, res, next) => {
             return res.redirect('/ticket');
         }
 
-        // await Ticket.updateOne({idTicket: req.body.idTicket}, {
-        //     $set : {
-        //         status: 'Selesai',
-        //         fixed: true
-        //     }
-        // })
-        console.log(req.body);
+        await Ticket.updateOne({idTicket: req.body.idTicket}, {
+            $set : {
+                status: 'Selesai',
+                fixed: true
+            }
+        })
+
+        await Chatroom.updateOne({idTicket: req.body.idTicket}, {
+            $set : {
+                disabled: true
+            }
+        })
+
         console.log('Ticket complete!');
 
-        // if(console.req.body)
-        return res.redirect('/ticket');
+        if(req.body.petugas === 'false'){
+            return res.redirect('/ticket');
+        }
+        else{
+            return res.redirect('/petugas/ticket');
+        }
     }
     catch(error){
         console.error('completing-ticket-error', error);
