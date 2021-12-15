@@ -25,7 +25,7 @@ module.exports.Submit = async (req, res, next) => {
     }
     catch(error){
         console.error('submit-ticket-error', error);
-        req.session.error = 'Submit Ticket Error - Unknown Error';
+        req.flash('error', 'Ticket submit Error - Unknown Error');
         return res.redirect('/submit')
     }
 };
@@ -36,7 +36,7 @@ module.exports.Cancel = async (req, res, next) => {
 
         if(!ticket){
             console.log('404. Ticket not found!');
-            req.session.error = 'Ticket tidak ditemukan!';
+            req.flash('error', 'Tiket tidak ditemukan!');
             return res.redirect('/ticket');
         }
 
@@ -51,7 +51,7 @@ module.exports.Cancel = async (req, res, next) => {
     }
     catch(error){
         console.error('cancel-ticket-error', error);
-        req.session.error = 'Cancel Ticket Error - Unknown Error';
+        req.flash('error', 'Cancel Ticket Error - Unknown Error');
         return res.redirect('/ticket')
     }
 };
@@ -66,7 +66,7 @@ exports.Approve = async (req, res, next) => {
 
         if(!ticket){
             console.log('404. Ticket not found!');
-            req.session.error = 'Ticket tidak ditemukan!';
+            req.flash('error', 'Tiket tidak ditemukan');
             return res.redirect('/petugas/ticket');
         }
 
@@ -97,7 +97,7 @@ exports.Approve = async (req, res, next) => {
     }
     catch(error){
         console.error('approve-ticket-error', error);
-        req.session.error = 'Approve Ticket Error - Unknown Error';
+        req.flash('error', 'Approve Ticket Error - Unknown Error');
         return res.redirect('/petugas/ticket');
     }
 }
@@ -109,7 +109,7 @@ exports.Decline = async (req, res, next) => {
 
         if(!ticket){
             console.log('404. Ticket not found!');
-            req.session.error = 'Ticket tidak ditemukan!';
+            req.flash('error', 'Tiket tidak ditemukan');
             return res.redirect('/petugas/ticket');
         }
 
@@ -126,7 +126,7 @@ exports.Decline = async (req, res, next) => {
     }
     catch(error){
         console.error('decline-ticket-error', error);
-        req.session.error = 'Decline Ticket Error - Unknown Error';
+        req.flash('error', 'Decline Ticket Error - Unknown Error');
         return res.redirect('/petugas/ticket')
     }
 }
@@ -138,7 +138,7 @@ module.exports.Selesai = async (req, res, next) => {
 
         if(!ticket){
             console.log('404. Ticket not found!');
-            req.session.error = 'Ticket tidak ditemukan!';
+            req.flash('error', 'Tiket tidak ditemukan!');
             return res.redirect('/ticket');
         }
 
@@ -166,7 +166,7 @@ module.exports.Selesai = async (req, res, next) => {
     }
     catch(error){
         console.error('completing-ticket-error', error);
-        req.session.error = 'Completing Ticket Error - Unknown Error';
+        req.flash('error', 'Completing Ticket Error - Unknown Error');
         return res.redirect('/ticket')
     }
 };

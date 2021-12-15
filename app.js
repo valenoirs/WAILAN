@@ -5,6 +5,7 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -49,6 +50,8 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.use(flash());
 
 // Templating Engine
 app.set('view engine', 'ejs');

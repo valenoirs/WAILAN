@@ -24,13 +24,13 @@ module.exports.Register = async (req, res, next) => {
         
         if(petugas){
             console.log('Petugas with same email found!');
-            req.session.error = ('Email telah terdaftar!');
+            req.flash('error', 'Email sudah terdaftar!');
             return res.redirect('/petugas/register');
         }
 
         if(req.body.password !== req.body.confirmPassword){
             console.log('Password validation error!')
-            req.session.error = ('Konfirmasi password salah!');
+            req.flash('error', 'Konfirmasi password salah!');
             return res.redirect('/petugas/register');
         }
 
@@ -65,7 +65,7 @@ exports.Login = async (req, res, next) => {
         // Petugas validation
         if(!petugas){
             console.log('Petugas not found!');
-            req.session.error = 'Email salah!';
+            req.flash('error', 'Email tidak ditemukan!');
             return res.redirect('/petugas/login');
         }
 
@@ -74,7 +74,7 @@ exports.Login = async (req, res, next) => {
 
         if(!passwordValid){
             console.log('Password invalid!');
-            console.log('Password salah');
+            req.flash('error', 'Password salah!');
             return res.redirect('/petugas/login');
         }
 

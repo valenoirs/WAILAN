@@ -24,13 +24,13 @@ module.exports.Register = async (req, res, next) => {
         
         if(user){
             console.log('User with same email found!');
-            req.session.error = ('Email telah terdaftar!');
+            req.flash('error', 'Email telah terdaftar!');
             return res.redirect('/register');
         }
 
         if(req.body.password !== req.body.confirmPassword){
             console.log('Password validation error!')
-            req.session.error = ('Konfirmasi password salah!');
+            req.flash('error', 'Konfirmasi password salah!');
             return res.redirect('/register');
         }
 
@@ -65,7 +65,8 @@ exports.Login = async (req, res, next) => {
         // User validation
         if(!user){
             console.log('User not found!');
-            req.session.error = 'Email salah!';
+            req.flash('error', 'Email tidak ditemukan!');
+            // req.session.error = 'Email salah!';
             return res.redirect('/login');
         }
 
@@ -74,7 +75,7 @@ exports.Login = async (req, res, next) => {
 
         if(!passwordValid){
             console.log('Password invalid!');
-            console.log('Password salah');
+            req.flash('error', 'Password salah!');
             return res.redirect('/login');
         }
 
@@ -87,7 +88,7 @@ exports.Login = async (req, res, next) => {
     }
     catch (error) {
         console.error('login-error', error);
-        req.session.error = "Login Error";
+        req.flash('error', 'Login Error!');
         return res.redirect('/login');
     }
 };

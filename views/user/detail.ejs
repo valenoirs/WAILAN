@@ -3,6 +3,14 @@
     <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
   </div>
 </div>
+<% if (error.length > 0) { %>
+  <div class="row mt-5">
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <%= error %>.
+    </div>
+  </div>
+  <% } %>
 <div class="row justify-content-center mt-4">
 <table class="table" id="myTable">
   <thead class="table">
@@ -37,9 +45,9 @@
             <div class="btn-group">
             <a href="/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
             <% if (!ticket.fixed) { %>
-              <form class="" method="POST" action="/ticket/selesai">
+              <form method="POST" action="/ticket/selesai">
                 <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
-                <input type="hidden" name="petugas" name="true">
+                <input type="hidden" name="petugas" name="false">
                 <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-bookmark-check-fill"></i></button>
               </form>
             <% } %>

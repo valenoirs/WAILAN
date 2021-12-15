@@ -1,4 +1,12 @@
 <div class="row mt-5">
+    <% if (error.length > 0) { %>
+        <div class="row mt-5">
+          <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <%= error %>.
+          </div>
+        </div>
+        <% } %>
     <div class="col-6">
         <h1>Submit Ticket</h1>
         <form method="POST" action="/ticket">

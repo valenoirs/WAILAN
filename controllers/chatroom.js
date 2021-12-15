@@ -13,8 +13,8 @@ module.exports.Send = async (req, res, next) => {
         return res.redirect('back');
     }
     catch(error){
-        console.error('decline-ticket-error', error);
-        req.session.error = 'Decline Ticket Error - Unknown Error';
-        return res.redirect('back')
+        console.error('sending-message-error', error);
+        req.flash('error', 'Gagal mengirimkan pesan - unknown error');
+        return res.redirect('back');
     }
 }

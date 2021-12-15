@@ -10,6 +10,14 @@
       <input class="form-control me-2" id="myInput" type="search" onkeyup="myFunction()" placeholder="Search" aria-label="Search">
     </div>
 </div>
+<% if (error.length > 0) { %>
+<div class="row mt-5">
+  <div class="alert alert-danger alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <%= error %>.
+  </div>
+</div>
+<% } %>
 <div class="row justify-content-center mt-4">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">

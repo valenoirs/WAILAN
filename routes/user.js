@@ -16,7 +16,7 @@ router.get('/logout', UserController.Logout);
 // Get
 router.get('/login', (req, res) => {
     if(!req.session.idUser){
-        res.render('user/login', {title: 'Login', layout: 'layouts/user-layout'});
+        res.render('user/login', {title: 'Login', layout: 'layouts/user-layout', error: req.flash('error')});
     }
     else{
         res.redirect('/');
@@ -25,7 +25,7 @@ router.get('/login', (req, res) => {
 
 router.get('/register', (req, res) => {
     if(!req.session.idUser){
-        res.render('user/register', {title: 'Register', layout: 'layouts/user-layout'});
+        res.render('user/register', {title: 'Register', layout: 'layouts/user-layout', error: req.flash('error')});
     }
     else{
         res.redirect('/');
@@ -38,7 +38,7 @@ router.get('/ticket', async (req, res) => {
     }
     else{
         const tickets = await Ticket.find({idUser: req.session.idUser});
-        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout', tickets});
+        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout', tickets, error: req.flash('error')});
     }
 })
 
@@ -47,7 +47,7 @@ router.get('/submit', (req, res) => {
         res.redirect('/login');
     }
     else{
-        res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout'});
+        res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout', error: req.flash('error')});
     }
 })
 
@@ -76,7 +76,7 @@ router.get('/ticket/:idTicket', async (req, res) => {
     }
     else{
         const ticket = await Ticket.findOne({idTicket: req.params.idTicket});
-        res.render('user/detail', {title: 'Ticket', layout: 'layouts/user-layout', ticket});
+        res.render('user/detail', {title: 'Ticket', layout: 'layouts/user-layout', ticket, error: req.flash('error')});
     }
 })
 

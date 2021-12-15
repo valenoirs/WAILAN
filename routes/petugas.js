@@ -16,7 +16,7 @@ router.get('/logout', PetugasController.Logout);
 // Get
 router.get('/login', (req, res) => {
     if(!req.session.idPetugas){
-        res.render('petugas/login', {title: 'Login - Petugas', layout: 'layouts/petugas-layout'});
+        res.render('petugas/login', {title: 'Login - Petugas', layout: 'layouts/petugas-layout', error: req.flash('error')});
 
     }
     else{
@@ -26,7 +26,7 @@ router.get('/login', (req, res) => {
 
 router.get('/register', (req, res) => {
     if(!req.session.idPetugas){
-        res.render('petugas/register', {title: 'Register - Petugas', layout: 'layouts/petugas-layout'});
+        res.render('petugas/register', {title: 'Register - Petugas', layout: 'layouts/petugas-layout', error: req.flash('error')});
     }
     else{
         res.redirect('/petugas');
@@ -39,7 +39,7 @@ router.get('/ticket', async (req, res) => {
     }
     else{
         const tickets = await Ticket.find()
-        res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets});
+        res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets, error: req.flash('error')});
     }
 });
 
@@ -49,7 +49,7 @@ router.get('/ticket/approved', async (req, res) => {
     }
     else{
         const tickets = await Ticket.find({idPetugas: req.session.idPetugas, status: 'Diterima'})
-        res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets});
+        res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets, error: req.flash('error')});
     }
 });
 
@@ -78,7 +78,7 @@ router.get('/ticket/:idTicket', async (req, res) => {
     }
     else{
         const ticket = await Ticket.findOne({idTicket: req.params.idTicket});
-        res.render('petugas/detail', {title: 'Ticket', layout: 'layouts/petugas-layout', ticket});
+        res.render('petugas/detail', {title: 'Ticket', layout: 'layouts/petugas-layout', ticket, error: req.flash('error')});
     }
 })
 
