@@ -99,6 +99,51 @@ exports.Login = async (req, res, next) => {
     }
 };
 
+exports.Edit = async (req, res, next) => {
+    try {
+        console.log(req.body);
+        const user = await User.findOne({email: req.body.email});
+        
+        if(user.email !== req.body.email && user){
+            console.log('User with same email found!');
+            req.flash('error', 'Email telah terdaftar!');
+            return res.redirect('/profile/edit');
+        }
+        console.log('checkpoint')
+        if(req.body.password.length < 8){
+            console.log('Password length less than 8 characters!')
+            req.flash('error', 'Password terlalu singkat!');
+            return res.redirect('/profile/edit');
+        }
+
+        if(req.body.password !== req.body.confirmPassword){
+            console.log('Password validation error!')
+            req.flash('error', 'Konfirmasi password salah!');
+            return res.redirect('/profile/edit');
+        }
+
+        const hash = await hashPassword(req.body.password);
+
+        delete req.body.confirmPassword;
+
+        req.body.password = hash;
+        console.log(req.body);
+        // const updateUser = new User(req.body);
+        // await updateUser.save();
+
+        // console.log(updateUser);
+        console.log('User Edited!');
+
+        return res.redirect('/login');
+
+    }
+    catch (error) {
+        console.error('edit-error', error);
+        req.session.error = "Edit profile Error";
+        return res.redirect('/profile/edit');
+    }
+};
+
 exports.Logout = async (req, res, next) => {
     try{
         delete req.session.idUser;

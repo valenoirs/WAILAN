@@ -11,6 +11,8 @@ const User = require('../models/user');
 router.post('/login', UserController.Login);
 router.post('/register', UserController.Register);
 
+router.put('/', UserController.Edit);
+
 // Logout
 router.get('/logout', UserController.Logout);
 
@@ -51,6 +53,16 @@ router.get('/submit', async (req, res) => {
     else{
         const user = await User.findOne({idUser: req.session.idUser});
         res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout', user, error: req.flash('error')});
+    }
+})
+
+router.get('/profile/edit', async (req, res) => {
+    if(!req.session.idUser){
+        res.redirect('/login');
+    }
+    else{
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/edit', {title: 'Submit', layout: 'layouts/user-layout', user, error: req.flash('error')});
     }
 })
 
