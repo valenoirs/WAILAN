@@ -27,7 +27,8 @@
                               </th>
                               <td>
                                   <h6><%= pesan.nama %></h6>
-                                  <p><%= pesan.pesan %></p>
+                                  <p class="text-muted"><%= pesan.createdAt.toLocaleTimeString('id', {hour: '2-digit', minute: '2-digit'}) %></p>
+                                  <p class="btn btn-primary"><%= pesan.pesan %></p>
                               </td>
                               <td></td>
                           </tr>
@@ -38,7 +39,8 @@
                               </th>
                               <td style="text-align: end;">
                                   <h6><%= pesan.nama %></h6>
-                                  <p><%= pesan.pesan %></p>
+                                  <p class="text-muted"><%= pesan.createdAt.toLocaleTimeString('id', {hour: '2-digit', minute: '2-digit'}) %></p>
+                                  <p class="btn btn-outline-primary"><%= pesan.pesan %></p>
                               </td>
                               <td></td>
                           </tr>

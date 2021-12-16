@@ -5,6 +5,7 @@ const UserController = require('../controllers/user');
 // Import Models
 const Ticket = require('../models/ticket');
 const Chatroom = require('../models/chatroom');
+const User = require('../models/user');
 
 // Post
 router.post('/login', UserController.Login);
@@ -38,25 +39,28 @@ router.get('/ticket', async (req, res) => {
     }
     else{
         const tickets = await Ticket.find({idUser: req.session.idUser});
-        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout', tickets, error: req.flash('error')});
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/ticket', {title: 'Ticket', layout: 'layouts/user-layout', tickets, user, error: req.flash('error')});
     }
 })
 
-router.get('/submit', (req, res) => {
+router.get('/submit', async (req, res) => {
     if(!req.session.idUser){
         res.redirect('/login');
     }
     else{
-        res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout', error: req.flash('error')});
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/submit', {title: 'Submit', layout: 'layouts/user-layout', user, error: req.flash('error')});
     }
 })
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     if(!req.session.idUser){
         res.redirect('/login');
     }
     else{
-        res.render('user/home',  {title: 'Home', layout: 'layouts/user-layout'});
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/home',  {title: 'Home', layout: 'layouts/user-layout', user});
     }
 })
 
@@ -66,7 +70,8 @@ router.get('/chatroom/:idChatroom', async (req, res) => {
     }
     else{
         const chatroom = await Chatroom.findOne({idChatroom: req.params.idChatroom});
-        res.render('user/chatroom', {title: 'Chatroom', layout: 'layouts/user-layout', chatroom});
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/chatroom', {title: 'Chatroom', layout: 'layouts/user-layout', chatroom, user});
     }
 })
 
@@ -76,7 +81,8 @@ router.get('/ticket/:idTicket', async (req, res) => {
     }
     else{
         const ticket = await Ticket.findOne({idTicket: req.params.idTicket});
-        res.render('user/detail', {title: 'Ticket', layout: 'layouts/user-layout', ticket, error: req.flash('error')});
+        const user = await User.findOne({idUser: req.session.idUser});
+        res.render('user/detail', {title: 'Ticket', layout: 'layouts/user-layout', ticket, user, error: req.flash('error')});
     }
 })
 

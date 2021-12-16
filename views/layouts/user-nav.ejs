@@ -1,5 +1,5 @@
 <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profile" style="position:fixed;bottom:5%;right:2%;">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profile" style="position:fixed;bottom:3%;right:2%;">
     <i class="bi bi-person-circle"></i> Profile
 </button>
   
@@ -16,13 +16,30 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-          
+          <p>
+            Nama : 
+            <strong><%= user.name %></strong>
+          </p>
+          <p>
+            Tanggal Lahir : 
+            <strong><%= user.birth.toLocaleDateString('id', { year: 'numeric', month: 'long', day: 'numeric'}) %></strong>
+          </p>
+          <p>
+            Jenis Kelamin : 
+            <strong><%= user.gender %></strong>
+          </p>
+          <p>
+            E-mail : 
+            <strong><%= user.email %></strong>
+          </p>
+          <br>
+          <a class="btn btn-primary" href="/profile/edit"><i class="bi bi-pencil-square"></i> Edit</a>
         </div>
   
         <!-- Modal footer -->
         <div class="modal-footer">
           <form class="d-flex" method="GET" action="/logout">
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')">Logout</button>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-box-arrow-left"></i> Logout</button>
           </form>
         </div>
   

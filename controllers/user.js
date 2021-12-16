@@ -28,6 +28,12 @@ module.exports.Register = async (req, res, next) => {
             return res.redirect('/register');
         }
 
+        if(req.body.password.length < 8){
+            console.log('Password length less than 8 characters!')
+            req.flash('error', 'Password terlalu singkat!');
+            return res.redirect('/register');
+        }
+
         if(req.body.password !== req.body.confirmPassword){
             console.log('Password validation error!')
             req.flash('error', 'Konfirmasi password salah!');

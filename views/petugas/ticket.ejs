@@ -4,7 +4,7 @@
 <hr> -->
 <div class="row justify-content-center mt-4">
     <div class="col">
-      <a href="/petugas" class="">Home</a>
+      <a style="text-decoration: none;" href="/petugas" class=""><i class="bi bi-house-door-fill"></i> Home</a>
     </div>
     <div class="col">
       <input class="form-control me-2" id="myInput" type="search" onkeyup="myFunction()" placeholder="Search" aria-label="Search">
@@ -18,7 +18,7 @@
   </div>
 </div>
 <% } %>
-<div class="row justify-content-center mt-4">
+<div class="row justify-content-center mt-4 mb-5">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
@@ -66,10 +66,16 @@
                     <h6>Status : <%= ticket.status; %></h6>
                   </td>
                   <td class="text-center">
-                    <form class="mt-5" method="POST" action="/ticket/cancel">
-                      <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
-                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-info-circle"></i> Batalkan</button>
-                    </form>
+                    <div class="btn-group">
+                      <form method="POST" action="/ticket/approve">
+                        <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-file-earmark-check-fill"></i></button>
+                      </form>
+                      <form method="POST" action="/ticket/decline">
+                        <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-file-earmark-excel-fill"></i></button>
+                      </form>
+                    </div>
                   </td>
                   </tr>
                   <% } else if (ticket.status === 'Diterima') { %>
@@ -83,14 +89,18 @@
                       <h6>Status : <%= ticket.status; %></h6>
                     </td>
                     <td class="text-center">
-                      <div class="btn-group mt-5">
-                        <a href="/petugas/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
-                        <form method="POST" action="/ticket/selesai">
-                          <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
-                          <input type="hidden" name="petugas" value="false">
-                          <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-bookmark-check-fill"></i></button>
-                        </form>
-                      </div>
+                      <% if (ticket.idPetugas === idPetugas) { %>
+                        <div class="btn-group mt-5">
+                          <a href="/petugas/chatroom/<%= ticket.idChatroom %>" class="btn btn-primary"><i class="bi bi-chat-left-text-fill"></i></a>
+                          <form method="POST" action="/ticket/selesai">
+                            <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                            <input type="hidden" name="petugas" value="false">
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-bookmark-check-fill"></i></button>
+                          </form>
+                        </div> 
+                      <% } else { %>
+                        <h6 class="text-primary mt-5"><i class="bi bi-info-circle"></i> Diproses</h6>
+                      <% } %> 
                     </td>
                     </tr>
                   <% } else if(ticket.status === 'Ditolak') { %> 

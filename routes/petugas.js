@@ -24,7 +24,7 @@ router.get('/login', (req, res) => {
     }
 });
 
-router.get('/register', (req, res) => {
+router.get('/wailan/kominfo/tomohon/register', (req, res) => {
     if(!req.session.idPetugas){
         res.render('petugas/register', {title: 'Register - Petugas', layout: 'layouts/petugas-layout', error: req.flash('error')});
     }
@@ -49,7 +49,7 @@ router.get('/ticket/approved', async (req, res) => {
     }
     else{
         const tickets = await Ticket.find({idPetugas: req.session.idPetugas, status: 'Diterima'})
-        res.render('petugas/ticket', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets, error: req.flash('error')});
+        res.render('petugas/aktif', {title: 'Ticket', layout: 'layouts/petugas-layout', tickets, error: req.flash('error')});
     }
 });
 

@@ -1,3 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      WAILAN
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    </div>
+  </div>
+</nav>
+
 <div class="row mt-4" style="margin-left: 0px; margin-right: 0px; padding-left: 50px; padding-right: 50px;">
   <div class="col">
     <a href="/" class="">Home</a> / <a href="/ticket">Ticket</a>
@@ -11,12 +24,14 @@
     </div>
   </div>
   <% } %>
-  <div class="row mt-4" style="margin-left: 0px; margin-right: 0px; padding-left: 50px; padding-right: 50px;">
+<div class="row mt-4 mb-5" style="margin-left: 0px; margin-right: 0px; padding-left: 50px; padding-right: 50px;">
 <table class="table" id="myTable">
   <thead class="table">
       <tr>
         <th style="width: 100px;" scope="col"></th>
-        <th scope="col"><h4><%= ticket.subject %></h4></th>
+        <th scope="col">
+          <h4><%= ticket.subject %></h4>
+        </th>
         <th style="width: 200px;" scope="col"></th>
       </tr>
     </thead>
@@ -40,6 +55,9 @@
         <td>
           <p>Status : <strong><%= ticket.status %></strong></p>
           <p><%= ticket.keterangan %></p>
+          <br>
+          <%= ticket.createdAt.toLocaleString('id') %>
+          <br>
           <br>
           <% if (ticket.status === "Diterima" || ticket.status === "Selesai") { %>
             <div class="btn-group">
