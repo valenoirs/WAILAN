@@ -63,8 +63,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/chatroom/:idChatroom', async (req, res) => {
-    if(!req.session.idUser){
-        res.redirect('/login');
+    if(!req.session.idPetugas){
+        res.redirect('/petugas/login');
     }
     else{
         const chatroom = await Chatroom.findOne({idChatroom: req.params.idChatroom});
@@ -73,8 +73,8 @@ router.get('/chatroom/:idChatroom', async (req, res) => {
 })
 
 router.get('/ticket/:idTicket', async (req, res) => {
-    if(!req.session.idUser){
-        res.redirect('/login');
+    if(!req.session.idPetugas){
+        res.redirect('/petugas/login');
     }
     else{
         const ticket = await Ticket.findOne({idTicket: req.params.idTicket});

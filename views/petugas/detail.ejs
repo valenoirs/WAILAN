@@ -57,6 +57,17 @@
                   <% } %>
                   </div>
                 <% } %>
+              <% } else if (ticket.status === "Menunggu") {%>
+                <div class="btn-group">
+                  <form method="POST" action="/ticket/approve">
+                    <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')"><i class="bi bi-file-earmark-check-fill"></i></button>
+                  </form>
+                  <form method="POST" action="/ticket/decline">
+                    <input type="hidden" name="idTicket" value="<%= ticket.idTicket %>">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure?')"><i class="bi bi-file-earmark-excel-fill"></i></button>
+                  </form>
+                </div>
               <% } %>
             </td>
             <td></td>
