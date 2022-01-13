@@ -1,5 +1,6 @@
 // Requiring module, packages, etc.
 const {v4: uuidv4} = require('uuid');
+const sendMail = require('../utils/sendEmail');
 
 // Import Models
 const User = require('../models/user');
@@ -12,6 +13,7 @@ module.exports.Submit = async (req, res, next) => {
     try{
         const user = await User.findOne({idUser: req.body.idUser});
 
+        req.body.emailUser = user.email;
         req.body.nameUser = user.name;
         req.body.idTicket = uuidv4();
 
@@ -92,6 +94,8 @@ exports.Approve = async (req, res, next) => {
             subject: ticket.subject,
         })
 
+        sendMail(ticket.emailUser, 'Ticket anda diterima oleh petugas, anda dapat menghubungi petugas melalui WAILAN atau melalui link berikut : null');
+
         console.log('Ticket approved!');
         return res.redirect('/petugas/ticket');
     }
@@ -120,6 +124,8 @@ exports.Decline = async (req, res, next) => {
                 status: 'Ditolak'
             }
         })
+
+        sendMail(ticket.emailUser, 'Maaf, tiket yang anda submit tidak diterima oleh petugas, jika masih ada keluhan silahkan submit tiket yang baru, Terima Kasih.');
 
         console.log('Ticket declined!');
         return res.redirect('/petugas/ticket');

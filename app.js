@@ -17,7 +17,7 @@ const port = process.env.LOCAL_PORT;
 
 // Create session store in database
 app.use(session({
-    secret: 'valenoirs',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
@@ -34,20 +34,13 @@ app.use((req, res, next) => {
     if(req.session.idUser){
         res.locals.idUser = req.session.idUser;
     }
-    next();
-});
-
-app.use((req, res, next) => {
     if(req.session.idPetugas){
         res.locals.idPetugas = req.session.idPetugas;
     }
-    next();
-});
-
-app.use((req, res, next) => {
     if(req.session.idAdmin){
         res.locals.idAdmin = req.session.idAdmin;
     }
+
     next();
 });
 

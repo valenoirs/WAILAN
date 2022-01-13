@@ -6,21 +6,21 @@ const sendEmail = async (email, balasan) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: '19012007@unikadelasalle.ac.id',
-                pass: 'claudea12007'
+                user: process.env.HOST_EMAIL_ADDRESS,
+                pass: process.env.HOST_EMAIL_PASSWORD
             }
         });
 
         let mailOption = {
-            from: '19012007@unikadelasalle.ac.id',
+            from: process.env.HOST_EMAIL_ADDRESS,
             to: email,
-            subject: 'Balasan Admin UKM',
-            text: `${balasan}`
+            subject: 'Tiket WAILAN Diskominfo Kota Tomohon',
+            text: balasan
         };
 
         transporter.sendMail(mailOption, (error, info) => {
             if(error) {
-                console.log(error);
+                console.error('send-mail-error', error);
             }
             else {
                 console.log(`Email sent: ${info.response}`);
@@ -29,7 +29,8 @@ const sendEmail = async (email, balasan) => {
     }
     catch(error){
         console.error('send-mail-error', error);
-        return res.redirect(`/admin/balasan/${email}`);
+        req.flash('error', 'Gagal mengirimkan email!');
+        return res.redirect('back');
     }
 }
 
