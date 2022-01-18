@@ -62,7 +62,7 @@ router.get('/profile/edit', async (req, res) => {
     }
     else{
         const user = await User.findOne({idUser: req.session.idUser});
-        res.render('user/edit', {title: 'Submit', layout: 'layouts/user-layout', user, error: req.flash('error')});
+        res.render('user/edit', {title: 'Edit', layout: 'layouts/user-layout', user, error: req.flash('error')});
     }
 })
 

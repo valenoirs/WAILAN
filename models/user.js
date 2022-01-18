@@ -5,7 +5,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     email: {type: String,  required: [true, 'User email required!'], unique: true},
     password: {type: String, required: [true, 'User password required!']},
     birth: {type: Date, required: [true, 'User tanggal lahir required!']},
-    name: {type: String,  required: [true, 'User nama required!']},
+    name: {type: String,  required: [true, 'Username required!']},
     gender: {type: String, required: [true, 'User gender required']},
 },
 {

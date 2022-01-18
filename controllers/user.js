@@ -100,41 +100,52 @@ exports.Login = async (req, res, next) => {
 };
 
 exports.Edit = async (req, res, next) => {
+    console.log(req.body);
     try {
-        console.log(req.body);
         const user = await User.findOne({email: req.body.email});
-        
-        if(user.email !== req.body.email && user){
-            console.log('User with same email found!');
-            req.flash('error', 'Email telah terdaftar!');
-            return res.redirect('/profile/edit');
-        }
-        console.log('checkpoint')
-        if(req.body.password.length < 8){
-            console.log('Password length less than 8 characters!')
-            req.flash('error', 'Password terlalu singkat!');
+
+        const passwordValid = comparePassword(req.body.password, user.password);
+
+        if(!passwordValid){
+            console.log('Password invalid!')
+            req.flash('error', 'Password yang anda masukkan salah!');
             return res.redirect('/profile/edit');
         }
 
-        if(req.body.password !== req.body.confirmPassword){
-            console.log('Password validation error!')
-            req.flash('error', 'Konfirmasi password salah!');
-            return res.redirect('/profile/edit');
+        if(req.body.newPassword){
+            if(req.body.newPassword.length < 8){
+                console.log('Password length less than 8 characters!')
+                req.flash('error', 'Password terlalu singkat!');
+                return res.redirect('/profile/edit');
+            }
+    
+            if(req.body.newPassword !== req.body.confirmPassword){
+                console.log('Password validation error!')
+                req.flash('error', 'Konfirmasi password salah!');
+                return res.redirect('/profile/edit');
+            }
+
+            const hash = await hashPassword(req.body.newPassword);
+            
+            delete req.body.confirmPassword;
+
+            await User.updateOne({email: req.body.email}, {
+                $set: {
+                    password: hash
+                }
+            })
         }
 
-        const hash = await hashPassword(req.body.password);
+        await User.updateOne({email: req.body.email}, {
+            $set: {
+                name: req.body.name,
+                gender: req.body.gender,
+                birth: req.body.birth,
+            }
+        })
 
-        delete req.body.confirmPassword;
-
-        req.body.password = hash;
-        console.log(req.body);
-        // const updateUser = new User(req.body);
-        // await updateUser.save();
-
-        // console.log(updateUser);
         console.log('User Edited!');
-
-        return res.redirect('/login');
+        return res.redirect('/');
 
     }
     catch (error) {
